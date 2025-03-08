@@ -38,11 +38,13 @@ export async function POST(request: NextRequest) {
       fullPage: true,
     });
 
+    const data = await page.content();
+
     await browser.close();
 
-    return new NextResponse(screenshot, {
+    return new NextResponse(data, {
       headers: {
-        "Content-Type": "image/jpeg",
+        "Content-Type": "application/json",
         "Cache-Control": "public, max-age=3600",
       },
     });
